@@ -7,10 +7,29 @@
 # В следующие N строк вводится по одному числу Ai (1 ≤ Ai ≤ m) - вес каждого путешественника. 
 # Программа должна вывести одно число - минимальное количество лодок, необходимое для переправки всех рыбаков на противоположный берег.
 
-m = int(input())
-n = int(input())
-a =[]
-for _ in range(n):
-    a.append(int(input()))
+def min_boats_required(max_weight, fishermen_weights):
+    fishermen_weights.sort()  # Сортируем веса рыбаков
+    boats_needed = 0  # Счетчик используемых лодок
+    left = 0  # Указатель в начале массива
+    right = len(fishermen_weights) - 1  # Указатель в конце массива
     
-print((2 * min(a) <= m) + len([x for x in a if x + min(a) > m]))
+    while left <= right:
+        # Если самый тяжелый и самый легкий рыбак могут поместиться вместе
+        if fishermen_weights[right] + fishermen_weights[left] <= max_weight:
+            left += 1  # Перемещаем указатель на следующего рыбака
+        right -= 1  # Самый тяжелый рыбак всегда идет в лодке
+        boats_needed += 1  # Увеличиваем количество лодок
+    
+    return boats_needed
+
+# Чтение входных данных
+max_weight = int(input("Введите максимальный вес, который может выдержать лодка: "))
+n = int(input("Введите количество рыбаков: "))
+fishermen_weights = []
+for i in range(n):
+    weight = int(input("Введите вес {}-го рыбака: ".format(i+1)))
+    fishermen_weights.append(weight)
+
+# Вызов функции и вывод результата
+result = min_boats_required(max_weight, fishermen_weights)
+print("Минимальное количество лодок, необходимое для переправки всех рыбаков:", result)
