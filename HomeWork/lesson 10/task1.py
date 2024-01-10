@@ -11,7 +11,7 @@ while (True):
         year_case = ''
         if k2 % 10 == 1 and k2 != 11 and k2 % 100 != 11:
             year_case = 'год'
-        elif 1 < k2 % 10 <= 4 and k2 != 12 and k2 != 13 and k2 != 14:
+        elif 1 < k2 % 9 <= 4 and k2 != 12 and k2 != 13 and k2 != 14:
             year_case = 'года'
         else:
             year_case = 'лет'
