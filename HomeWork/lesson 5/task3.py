@@ -2,10 +2,10 @@ def invest_decision(min_investment, michael_money, ivan_money):
     if michael_money >= min_investment and ivan_money >= min_investment:
         return 2
     elif michael_money >= min_investment:
-        return "Mike"
+        return 1
     elif ivan_money >= min_investment:
-        return "Ivan"
-    elif michael_money + ivan_money >= 2*min_investment:
+        return 1
+    elif michael_money + ivan_money >= min_investment:
         return 1
     else:
         return 0

@@ -1,2 +1,2 @@
-a, b = map(int, input().split())
-print(a * 2)
+print("привет, питон!", end=" ")
+print("Я учусь на курсе Python-разработчик", end="\n :)")
