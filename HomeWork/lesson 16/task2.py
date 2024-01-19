@@ -1,46 +1,43 @@
-class Turtle:
-    def __init__(self, x, y, s):
-        self.x = x
-        self.y = y
-        self.s = s
-
-    def go_up(self):
-        self.y += self.s
-
-    def go_down(self):
-        self.y -= self.s
-
-    def go_left(self):
-        self.x -= self.s
-
-    def go_right(self):
-        self.x += self.s
-
-    def evolve(self):
-        self.s += 1
-
-    def degrade(self):
-        if self.s > 1:
-            self.s -= 1
-        else:
-            raise ValueError("S cannot be decreased further")
-
-    def count_moves(self, x2, y2):
-        x_diff = abs(self.x - x2)
-        y_diff = abs(self.y - y2)
-        return x_diff + y_diff
-
-# Пример использования класса
-t = Turtle(0, 0, 3)
-t.go_up()
-t.go_right()
-t.evolve()
-print(t.x, t.y, t.s)
-
-try:
-    t.degrade()
-except ValueError as e:
-    print(e)
-
-moves = t.count_moves(3, 3)
-print("Минимальное количество действий:", moves)
+import random 
+import math 
+ 
+class Turtle: 
+    def __init__(self, x, y, s): 
+        self.x = x 
+        self.y = y 
+        self.s = s 
+ 
+    def go_up(self): 
+        self.y += self.s 
+ 
+    def go_down(self): 
+        self.y -= self.s 
+ 
+    def go_left(self): 
+        self.x -= self.s 
+ 
+    def go_right(self): 
+        self.x += self.s 
+ 
+    def evolve(self): 
+        self.s = min(self.s + 1, 5) 
+ 
+    def degrade(self): 
+        if self.s <= 1: 
+            raise ValueError("s не может быть ≤ 0") 
+        else: 
+            self.s -= 1 
+ 
+    def count_moves(self, x2, y2): 
+        dx = abs(x2 - self.x) 
+        dy = abs(y2 - self.y) 
+        return math.ceil(dx / self.s) + math.ceil(dy / self.s) 
+ 
+ 
+turtle = Turtle(random.randint(0, 800), random.randint(0, 600), random.randint(1, 5)) 
+ 
+dest_x = random.randint(0, 800) 
+dest_y = random.randint(0, 600) 
+ 
+min_moves = turtle.count_moves(dest_x, dest_y) 
+print(f"Минимальное количество ходов: {min_moves}")
